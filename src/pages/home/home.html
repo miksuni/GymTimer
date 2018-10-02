@@ -1,14 +1,134 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      GymTimer
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <h4>
+  Time: {{clockString}}
+  </h4>
+  <h2>
+  Serie: {{seriesCounter}}, Pause countdown: {{countDownValue}}
+  </h2>
+
+
+  <!-- 1st excercise -->
+  <table class="table_1" table_1border="1">
+    <tr>
+      <td rowspan="2">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+      </td>
+      <td colspan="4">
+        <select [(ngModel)]="excercise1" (ionChange)="logChosen()"  id="col2">
+          <option *ngFor="let excercise of excercises()">{{excercise}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td> tauko (s): </td>
+      <td><input class="input_narrow" [(ngModel)]="pause1" ></td>
+      <td> paino (kg): </td>
+      <td><input class="input_narrow" type="number" [(ngModel)]="weight1"></td>
+    </tr>
+  </table>
+
+<!-- 2nd excercise -->
+  <table class="table_1" table_1border="1">
+    <tr>
+      <td rowspan="2">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+      </td>
+      <td colspan="4">
+        <select [(ngModel)]="excercise2" (ionChange)="logChosen()"  id="col2">
+          <option *ngFor="let excercise of excercises()">{{excercise}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td> tauko (s): </td>
+      <td><input class="input_narrow" [(ngModel)]="pause2" ></td>
+      <td> paino (kg): </td>
+      <td><input class="input_narrow" type="number" [(ngModel)]="weight2"></td>
+    </tr>
+  </table>
+
+<!-- 3rd excercise -->
+  <table class="table_1" table_1border="1">
+    <tr>
+      <td rowspan="2">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+      </td>
+      <td colspan="4">
+        <select [(ngModel)]="excercise3" (ionChange)="logChosen()"  id="col2">
+          <option *ngFor="let excercise of excercises()">{{excercise}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td> tauko (s): </td>
+      <td><input class="input_narrow" [(ngModel)]="pause3" ></td>
+      <td> paino (kg): </td>
+      <td><input class="input_narrow" type="number" [(ngModel)]="weight3"></td>
+    </tr>
+  </table>
+
+  <!-- 4th excercise -->
+  <table class="table_1" table_1border="1">
+    <tr>
+      <td rowspan="2">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+      </td>
+      <td colspan="4">
+        <select [(ngModel)]="excercise4" (ionChange)="logChosen()"  id="col2">
+          <option *ngFor="let excercise of excercises()">{{excercise}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td> tauko (s): </td>
+      <td><input class="input_narrow" [(ngModel)]="pause4" ></td>
+      <td> paino (kg): </td>
+      <td><input class="input_narrow" type="number" [(ngModel)]="weight4"></td>
+    </tr>
+  </table>
+
+  <!-- 5th excercise -->
+  <table class="table_1" table_1border="1">
+    <tr>
+      <td rowspan="2">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+      </td>
+      <td colspan="4">
+        <select [(ngModel)]="excercise5" (ionChange)="logChosen()"  id="col2">
+          <option *ngFor="let excercise of excercises()">{{excercise}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td> tauko (s): </td>
+      <td><input class="input_narrow" [(ngModel)]="pause5" ></td>
+      <td> paino (kg): </td>
+      <td><input class="input_narrow" type="number" [(ngModel)]="weight5"></td>
+    </tr>
+  </table>
+
+  <!--
+  <ion-item>
+    <ion-label  stacked id="col1">5. laji</ion-label>
+    <ion-select [(ngModel)]="excercise5" (ionChange)="logChosen()" id="col2">
+      <ion-option *ngFor="let excercise of excercises()">{{excercise}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-input placeholder="Weight" id="col3"></ion-input>
+  </ion-item>
+  -->
+
+  <button ion-button large (click)="increaseSeriesCounter()">Next serie</button>
+  <button ion-button (click)="startStop()">{{startStopButtonCaption}}</button>
+  <button ion-button (click)="clearTimer()">Clear</button>
+
 </ion-content>
