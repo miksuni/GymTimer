@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SimpleTimer } from 'ng2-simple-timer';
+import { HttpClient } from '@angular/common/http';
+//import { Observable } from 'rxjs/Observable';
+import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  //testData: Observable<any>;
 
   startStopButtonCaption: string = 'Start';
   timerValue: number = 0;
   countDownValue: number = 90;
   timerId1: string;
   clockString: string = "00:00:00";
+  testStr: string = "...";
   firstTick: boolean = true;
   firstSerie: boolean = true;
   seriesCounter: number = 1;
@@ -35,6 +40,9 @@ export class HomePage {
   weight4: string = "10";
   weight5: string = "10";
 
+  //users: any;
+  testData: any;
+
   /**************************************/
     countries = [
        {id: 1, name: "United States"},
@@ -46,8 +54,27 @@ export class HomePage {
     selectedValue = null;
   /**************************************/
 
-  constructor(public navCtrl: NavController, private st: SimpleTimer) {
+  constructor(public navCtrl: NavController, private st: SimpleTimer, public httpClient: HttpClient, public restProvider: RestProvider) {
     this.st.newTimer('1sec',1);
+    //this.getUsers();
+    this.getTestData();
+  }
+
+  //getUsers() {
+  //  this.restProvider.getUsers()
+  //  .then(data => {
+  //    this.users = data;
+  //    console.log(this.users);
+  //  });
+  //}
+
+  getTestData() {
+    this.restProvider.getTestData()
+    .then(data => {
+      this.testData = data;
+      console.log(this.testData);
+      this.testStr = JSON.stringify(this.testData);
+    });
   }
 
   excercises(): string[] {
