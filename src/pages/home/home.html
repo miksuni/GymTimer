@@ -8,7 +8,7 @@
 
 <ion-content padding>
   <h4>
-  Time: {{clockString}} {{testStr}} {{testStr2}} ;)
+  Time: {{clockString}}
   </h4>
   <h2>
   Serie: {{seriesCounter}}, Pause countdown: {{countDownValue}}
@@ -18,7 +18,7 @@
   <table class="table_1" table_1border="1">
     <tr>
       <td rowspan="2">
-        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="65">
       </td>
       <td colspan="4">
         <select [(ngModel)]="excercise1" (ionChange)="logChosen()"  id="col2">
@@ -38,7 +38,7 @@
   <table class="table_1" table_1border="1">
     <tr>
       <td rowspan="2">
-        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="65">
       </td>
       <td colspan="4">
         <select [(ngModel)]="excercise2" (ionChange)="logChosen()"  id="col2">
@@ -58,7 +58,7 @@
   <table class="table_1" table_1border="1">
     <tr>
       <td rowspan="2">
-        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="65">
       </td>
       <td colspan="4">
         <select [(ngModel)]="excercise3" (ionChange)="logChosen()"  id="col2">
@@ -78,7 +78,7 @@
   <table class="table_1" table_1border="1">
     <tr>
       <td rowspan="2">
-        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="65">
       </td>
       <td colspan="4">
         <select [(ngModel)]="excercise4" (ionChange)="logChosen()"  id="col2">
@@ -98,7 +98,7 @@
   <table class="table_1" table_1border="1">
     <tr>
       <td rowspan="2">
-        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="100">
+        <img src="./assets/imgs/bumbbell_fly.jpg" alt="icon" width="auto" height="65">
       </td>
       <td colspan="4">
         <select [(ngModel)]="excercise5" (ionChange)="logChosen()"  id="col2">
@@ -129,5 +129,6 @@
   <button ion-button large (click)="increaseSeriesCounter()">Next serie</button>
   <button ion-button (click)="startStop()">{{startStopButtonCaption}}</button>
   <button ion-button (click)="clearTimer()">Clear</button>
+  <button ion-button (click)="goSettingsPage()">Settings</button>
 
 </ion-content>

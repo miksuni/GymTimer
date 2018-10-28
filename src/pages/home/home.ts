@@ -17,6 +17,7 @@ export class HomePage {
   clockString: string = "00:00:00";
   testStr: string = "...";
   testStr2: string = "...";
+  settingsString: string = '';
   firstTick: boolean = true;
   firstSerie: boolean = true;
   seriesCounter: number = 1;
@@ -41,6 +42,7 @@ export class HomePage {
 
   testData: any;
   testData2: any;
+  settingsData: any;
 
   /**************************************/
     countries = [
@@ -55,24 +57,14 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private st: SimpleTimer, public httpClient: HttpClient, public restProvider: RestProvider) {
     this.st.newTimer('1sec',1);
-    this.getTestData();
-    this.sayHello();
+    this.getSettings();
   }
 
-  getTestData() {
-    this.restProvider.getTestData()
-    .then(data => {
-      this.testData = data;
-      console.log(this.testData);
-      this.testStr = JSON.stringify(this.testData);
-    });
-  }
-
-  sayHello() {
-    this.restProvider.sayHello("").then((result) => {
+  getSettings() {
+    this.restProvider.settings("").then((result) => {
       console.log(result);
-      this.testData2 = result;
-      this.testStr2 = JSON.stringify(this.testData2);
+      this.settingsData = result;
+      //this.settingsStr = JSON.stringify(this.settingsData);
     }, (err) => {
       console.log(err);
     });
@@ -153,5 +145,10 @@ export class HomePage {
     minutesString = (minutes < 10) ? "0" + minutes : minutes.toString();
     secondsString = (seconds < 10) ? "0" + seconds : seconds.toString();
     return hoursString + ':' + minutesString + ':' + secondsString;
+  }
+
+  goSettingsPage() {
+    console.log('goSettingsPage');
+    this.navCtrl.push('SettingsPage', {});
   }
 }
