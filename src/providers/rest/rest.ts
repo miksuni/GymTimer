@@ -26,7 +26,7 @@ export class RestProvider {
       })
     };
   	return new Promise((resolve, reject) => {
-		this.http.post(this.herokuUrl + '/settings', /*JSON.stringify(data)*/ '{}', httpOptions)
+		this.http.post(this.herokuUrl + '/settings', '{}', httpOptions)
       		.subscribe(res => {
         resolve(res);
       	}, (err) => {
@@ -34,4 +34,21 @@ export class RestProvider {
       	});
   	});
   }
+
+	saveSettings(data) {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type':  'application/json',
+				'X-Parse-Application-Id': 'myAppId'
+			})
+		};
+		return new Promise((resolve, reject) => {
+			this.http.post(this.herokuUrl + '/settings', JSON.stringify(data), httpOptions)
+			.subscribe(res => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
+			});
+		});
+	}
 }

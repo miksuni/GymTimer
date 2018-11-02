@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <h2>Settings</h2>
+  <form (ngSubmit)="saveSettings()">
+  	<ion-item>
+      <ion-label>Excercise count</ion-label>
+      <ion-input type="number" [(ngModel)]="settings.exerciseCount" name="exerciseCount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pause in sec</ion-label>
+      <ion-input type="number" [(ngModel)]="settings.pauseInSec" name="pauseInSec"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Repeats in Set</ion-label>
+      <ion-input type="number" [(ngModel)]="settings.repeatsInSet" name="repeatsInSet"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Save settings</button>
+  </form>
+</ion-content>
