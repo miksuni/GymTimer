@@ -40,9 +40,12 @@ export class HomePage {
   weight4: string = "10";
   weight5: string = "10";
 
-  testData: any;
-  testData2: any;
+  //testData: any;
+  //testData2: any;
   settingsData: any;
+
+  settingsStr: any;
+  settings = { name:'', exerciseCount:'', pauseInSec:'', repeatsInSet:'' };
 
   /**************************************/
     countries = [
@@ -56,15 +59,24 @@ export class HomePage {
   /**************************************/
 
   constructor(public navCtrl: NavController, private st: SimpleTimer, public httpClient: HttpClient, public restProvider: RestProvider) {
+    console.log('>> home.constructor');
     this.st.newTimer('1sec',1);
     this.getSettings();
   }
 
+  ionViewDidLoad() {
+    console.log('>> home.ionViewDidLoad');
+    this.pause1 = this.settings.pauseInSec;
+  }
+
   getSettings() {
-    this.restProvider.settings("").then((result) => {
-      console.log(result);
-      this.settingsData = result;
-      //this.settingsStr = JSON.stringify(this.settingsData);
+    this.restProvider.settings("").then((result:any) => {
+      this.settingsStr = result.result;
+      console.log(this.settingsStr);
+
+      this.settings = JSON.parse(this.settingsStr);
+      this.pause1 = this.settings.pauseInSec;
+      console.log(this.settings);
     }, (err) => {
       console.log(err);
     });
