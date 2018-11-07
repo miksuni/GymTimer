@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { ViewChild } from '@angular/core';
+import { Navbar } from 'ionic-angular';
 
 /**
  * Generated class for the AdduserPage page.
@@ -15,8 +17,7 @@ import { RestProvider } from '../../providers/rest/rest';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-
-  //settingsStr: string = '';
+  @ViewChild(Navbar) navBar: Navbar;
   settingsStr: any;
   settings = { name:'', exerciseCount:'', pauseInSec:'', repeatsInSet:'' };
 
@@ -24,7 +25,11 @@ export class SettingsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AdduserPage');
+    console.log('>> settings.ionViewDidLoad');
+    this.navBar.backButtonClick = (e:UIEvent)=>{
+      console.log('>> settings.navBar.backButtonClick');
+      this.navCtrl.pop();
+    }
     this.getSettings();
   }
 
@@ -32,7 +37,6 @@ export class SettingsPage {
     this.restProvider.settings("").then((result:any) => {
       this.settingsStr = result.result;
       console.log(this.settingsStr);
-  
       this.settings = JSON.parse(this.settingsStr);
       console.log(this.settings);
 
@@ -46,10 +50,6 @@ export class SettingsPage {
     this.restProvider.saveSettings(this.settings).then((result:any) => {
       this.settingsStr = result.result;
       console.log(this.settingsStr);
-  
-      //this.settings = JSON.parse(this.settingsStr);
-      //console.log(this.settings);
-
     }, (err) => {
       console.log(err);
     });

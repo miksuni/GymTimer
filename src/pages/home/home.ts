@@ -12,7 +12,7 @@ export class HomePage {
 
   startStopButtonCaption: string = 'Start';
   timerValue: number = 0;
-  countDownValue: number = 90;
+  countDownValue: number = 0;
   timerId1: string;
   clockString: string = "00:00:00";
   testStr: string = "...";
@@ -66,16 +66,21 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('>> home.ionViewDidLoad');
-    this.pause1 = this.settings.pauseInSec;
+    //this.activateSettings();
+  }
+
+  ionViewWillEnter() {
+    console.log('>> home.ionViewWillEnter');
+    this.getSettings();
   }
 
   getSettings() {
+    console.log('>> home.getSettings');
     this.restProvider.settings("").then((result:any) => {
       this.settingsStr = result.result;
       console.log(this.settingsStr);
-
       this.settings = JSON.parse(this.settingsStr);
-      this.pause1 = this.settings.pauseInSec;
+      this.activateSettings();
       console.log(this.settings);
     }, (err) => {
       console.log(err);
@@ -119,7 +124,7 @@ export class HomePage {
     } else {
       this.seriesCounter = 1;
     }
-    this.countDownValue = 90;
+    this.countDownValue = parseInt(this.pause1);
     this.firstSerie = false;
   }
 
@@ -160,7 +165,17 @@ export class HomePage {
   }
 
   goSettingsPage() {
-    console.log('goSettingsPage');
+    console.log('>> home.goSettingsPage');
     this.navCtrl.push('SettingsPage', {});
+  }
+
+  activateSettings() {
+    console.log('>> home.activateSettings');
+    this.pause1 = this.settings.pauseInSec;
+    this.pause2 = this.settings.pauseInSec;
+    this.pause3 = this.settings.pauseInSec;
+    this.pause4 = this.settings.pauseInSec;
+    this.pause5 = this.settings.pauseInSec;
+    //this.countDownValue = parseInt(this.pause1);
   }
 }
