@@ -10,30 +10,30 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RestProvider {
 
-  apiUrl = 'https://jsonplaceholder.typicode.com';
-  //herokuUrl = 'https://parse-getting-started-msu.herokuapp.com/parse/classes/GameScore/Xh6sFZ7Ttc';
-  herokuUrl = 'https://parse-getting-started-msu.herokuapp.com/parse/functions'; // '/hello';
+	apiUrl = 'https://jsonplaceholder.typicode.com';
+	//herokuUrl = 'https://parse-getting-started-msu.herokuapp.com/parse/classes/GameScore/Xh6sFZ7Ttc';
+	herokuUrl = 'https://parse-getting-started-msu.herokuapp.com/parse/functions'; // '/hello';
 
-  constructor(public http: HttpClient) {
-  	console.log('Hello RestProvider Provider');
-  }
+	constructor(public http: HttpClient) {
+		console.log('Hello RestProvider Provider');
+	}
 
-  settings(data) {
-    const httpOptions = {
-  	  headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'X-Parse-Application-Id': 'myAppId'
-      })
-    };
-  	return new Promise((resolve, reject) => {
-		this.http.post(this.herokuUrl + '/settings', '{}', httpOptions)
-      		.subscribe(res => {
-        resolve(res);
-      	}, (err) => {
-        	reject(err);
-      	});
-  	});
-  }
+	settings(data) {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type':  'application/json',
+				'X-Parse-Application-Id': 'myAppId'
+			})
+		};
+		return new Promise((resolve, reject) => {
+			this.http.post(this.herokuUrl + '/settings', '{}', httpOptions)
+				.subscribe(res => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
+			});
+		});
+	}
 
 	saveSettings(data) {
 		const httpOptions = {
@@ -45,6 +45,41 @@ export class RestProvider {
 		return new Promise((resolve, reject) => {
 			this.http.post(this.herokuUrl + '/settings', JSON.stringify(data), httpOptions)
 			.subscribe(res => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
+			});
+		});
+	}
+
+	saveTraining(data) {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type':  'application/json',
+				'X-Parse-Application-Id': 'myAppId'
+			})
+		};
+		return new Promise((resolve, reject) => {
+			this.http.post(this.herokuUrl + '/newTraining', {}, httpOptions)
+			.subscribe(res => {
+				resolve(res);
+			}, (err) => {
+				reject(err);
+			});
+		});
+	}
+
+
+	exercises(data) {
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type':  'application/json',
+				'X-Parse-Application-Id': 'myAppId'
+			})
+		};
+		return new Promise((resolve, reject) => {
+			this.http.post(this.herokuUrl + '/exercises', '{}', httpOptions)
+				.subscribe(res => {
 				resolve(res);
 			}, (err) => {
 				reject(err);

@@ -47,6 +47,10 @@ export class HomePage {
   settingsStr: any;
   settings = { name:'', exerciseCount:'', pauseInSec:'', repeatsInSet:'' };
 
+  exercisesStr: any;
+  exercises = { createdAt:'', updatedAt:'', name:'', order:'', exerciseId:'', targetArea:'',
+                pauseInSec:'', setCount:'', repeatsInSet:'', objectId:'' };
+
   /**************************************/
     countries = [
        {id: 1, name: "United States"},
@@ -58,10 +62,12 @@ export class HomePage {
     selectedValue = null;
   /**************************************/
 
-  constructor(public navCtrl: NavController, private st: SimpleTimer, public httpClient: HttpClient, public restProvider: RestProvider) {
+  constructor(public navCtrl: NavController, private st: SimpleTimer, public httpClient: HttpClient,
+              public restProvider: RestProvider) {
     console.log('>> home.constructor');
     this.st.newTimer('1sec',1);
     this.getSettings();
+    this.getExercises();
   }
 
   ionViewDidLoad() {
@@ -178,4 +184,47 @@ export class HomePage {
     this.pause5 = this.settings.pauseInSec;
     //this.countDownValue = parseInt(this.pause1);
   }
+
+  saveTraining() {
+    console.log('>> home.saveTraining');
+    this.restProvider.saveTraining("").then((result:any) => {
+
+      console.log(">> training saved");
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  getExercises() {
+    console.log('>> home.getExercises');
+    this.restProvider.exercises("").then((result:any) => {
+      this.exercisesStr = result.result;
+      console.log(">> exercises as string: " + this.exercisesStr);
+      this.exercises = JSON.parse(this.exercisesStr);
+      //console.log(">> exercises as object: " + this.exercises);
+
+      for (var i = 0; i < this.exercises.length; i++) {
+        console.log(">> exercise: " + this.exercises[i].name);
+        if (this.exercises[i].order == 0 ) {
+          this.excercise1 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
+          this.weight1 = this.exercises[i].weightInKg.toString();
+        } else if (this.exercises[i].order == 1 ) {
+          this.excercise2 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
+          this.weight2 = this.exercises[i].weightInKg.toString();
+        } else if (this.exercises[i].order == 2 ) {
+          this.excercise3 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
+          this.weight3 = this.exercises[i].weightInKg.toString();
+        } else if (this.exercises[i].order == 3 ) {
+          this.excercise4 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
+          this.weight4 = this.exercises[i].weightInKg.toString();
+        } else if (this.exercises[i].order == 4 ) {
+          this.excercise5 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
+          this.weight5 = this.exercises[i].weightInKg.toString();
+        }
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
 }

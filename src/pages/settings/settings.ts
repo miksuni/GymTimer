@@ -39,7 +39,6 @@ export class SettingsPage {
       console.log(this.settingsStr);
       this.settings = JSON.parse(this.settingsStr);
       console.log(this.settings);
-
     }, (err) => {
       console.log(err);
     });
