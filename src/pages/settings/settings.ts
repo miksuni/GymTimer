@@ -19,7 +19,7 @@ import { Navbar } from 'ionic-angular';
 export class SettingsPage {
   @ViewChild(Navbar) navBar: Navbar;
   settingsStr: any;
-  settings = { name:'', exerciseCount:'', pauseInSec:'', repeatsInSet:'' };
+  settings = { name:'', exerciseCount:'', setCount:'', pauseInSec:'', repeatsInSet:'' };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
   }

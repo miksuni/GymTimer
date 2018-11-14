@@ -53,6 +53,7 @@ export class RestProvider {
 	}
 
 	saveTraining(data) {
+		console.log('>> home.saveTraining()');
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type':  'application/json',
@@ -60,7 +61,7 @@ export class RestProvider {
 			})
 		};
 		return new Promise((resolve, reject) => {
-			this.http.post(this.herokuUrl + '/newTraining', {}, httpOptions)
+			this.http.post(this.herokuUrl + '/newTraining', JSON.stringify(data), httpOptions)
 			.subscribe(res => {
 				resolve(res);
 			}, (err) => {

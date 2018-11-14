@@ -51,6 +51,12 @@ export class HomePage {
   exercises = { createdAt:'', updatedAt:'', name:'', order:'', exerciseId:'', targetArea:'',
                 pauseInSec:'', setCount:'', repeatsInSet:'', objectId:'' };
 
+  training1 = { exercise:'', pauseInSec:'', weightInKg:'', setCount:'', repeatsInSet:'' };
+  training2 = { exercise:'', pauseInSec:'', weightInKg:'', setCount:'', repeatsInSet:'' };
+  training3 = { exercise:'', pauseInSec:'', weightInKg:'', setCount:'', repeatsInSet:'' };
+  training4 = { exercise:'', pauseInSec:'', weightInKg:'', setCount:'', repeatsInSet:'' };
+  training5 = { exercise:'', pauseInSec:'', weightInKg:'', setCount:'', repeatsInSet:'' };
+
   /**************************************/
     countries = [
        {id: 1, name: "United States"},
@@ -186,9 +192,10 @@ export class HomePage {
   }
 
   saveTraining() {
-    console.log('>> home.saveTraining');
-    this.restProvider.saveTraining("").then((result:any) => {
-
+    console.log('>> home.saveTraining ' + JSON.stringify(this.training));
+    this.training1.pauseInSec = this.pause1;
+    this.training1.weightInKg = this.weight1;
+    this.restProvider.saveTraining(this.training1).then((result:any) => {
       console.log(">> training saved");
     }, (err) => {
       console.log(err);
@@ -203,6 +210,7 @@ export class HomePage {
       this.exercises = JSON.parse(this.exercisesStr);
       //console.log(">> exercises as object: " + this.exercises);
 
+      //for (var i = 0; i < result.result.length; i++) { // Android
       for (var i = 0; i < this.exercises.length; i++) {
         console.log(">> exercise: " + this.exercises[i].name);
         if (this.exercises[i].order == 0 ) {
@@ -226,5 +234,4 @@ export class HomePage {
       console.log(err);
     });
   }
-
 }
