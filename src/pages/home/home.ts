@@ -45,7 +45,7 @@ export class HomePage {
   settingsData: any;
 
   settingsStr: any;
-  settings = { name:'', exerciseCount:'', pauseInSec:'', repeatsInSet:'' };
+  settings = { name:'', exerciseCount:'', setCount:'', pauseInSec:'', repeatsInSet:'' };
 
   exercisesStr: any;
   exercises = { createdAt:'', updatedAt:'', name:'', order:'', exerciseId:'', targetArea:'',
@@ -87,7 +87,25 @@ export class HomePage {
   }
 
   getSettings() {
+    //var currentdate = new Date().toLocaleString();
+    //console.log('>> current date time: ' + currentdate);
     console.log('>> home.getSettings');
+
+    /*var currentdate = new Date();
+    var datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+    console.log('>> current date time: ' + datetime);
+
+    var trainingTime =  currentdate.getFullYear() + '-' +
+                        (currentdate.getMonth()+1) + '-' +
+                        currentdate.getDate() + 'T' +
+                        currentdate.getHours() + ':' +
+                        currentdate.getMinutes();*/
+
     this.restProvider.settings("").then((result:any) => {
       this.settingsStr = result.result;
       console.log(this.settingsStr);
@@ -193,9 +211,72 @@ export class HomePage {
 
   saveTraining() {
     console.log('>> home.saveTraining ' + JSON.stringify(this.training));
+
+    var currentdate = new Date();
+    var trainingTime =  currentdate.getFullYear() + '-' +
+                        (currentdate.getMonth()+1) + '-' +
+                        currentdate.getDate() + 'T' +
+                        currentdate.getHours() + ':' +
+                        currentdate.getMinutes() + ':' +
+                        currentdate.getSeconds() + '.000Z';
+    console.log('>> training time: ' + trainingTime);
+    //this.training1.date = trainingTime;
+
+    this.training1.date = currentdate;
+    this.training1.exercise = this.exercises[0].objectId;
     this.training1.pauseInSec = this.pause1;
     this.training1.weightInKg = this.weight1;
+    this.training1.setCount = this.settings.setCount;
+    this.training1.repeatsInSet = this.settings.repeatsInSet;
     this.restProvider.saveTraining(this.training1).then((result:any) => {
+      console.log(">> training saved");
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.training2.date = currentdate;
+    this.training2.exercise = this.exercises[1].objectId;
+    this.training2.pauseInSec = this.pause2;
+    this.training2.weightInKg = this.weight2;
+    this.training2.setCount = this.settings.setCount;
+    this.training2.repeatsInSet = this.settings.repeatsInSet;
+    this.restProvider.saveTraining(this.training2).then((result:any) => {
+      console.log(">> training saved");
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.training3.date = currentdate;
+    this.training3.exercise = this.exercises[2].objectId;
+    this.training3.pauseInSec = this.pause3;
+    this.training3.weightInKg = this.weight3;
+    this.training3.setCount = this.settings.setCount;
+    this.training3.repeatsInSet = this.settings.repeatsInSet;
+    this.restProvider.saveTraining(this.training3).then((result:any) => {
+      console.log(">> training saved");
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.training4.date = currentdate;
+    this.training4.exercise = this.exercises[3].objectId;
+    this.training4.pauseInSec = this.pause4;
+    this.training4.weightInKg = this.weight4;
+    this.training4.setCount = this.settings.setCount;
+    this.training4.repeatsInSet = this.settings.repeatsInSet;
+    this.restProvider.saveTraining(this.training4).then((result:any) => {
+      console.log(">> training saved");
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.training5.date = currentdate;
+    this.training5.exercise = this.exercises[4].objectId;
+    this.training5.pauseInSec = this.pause5;
+    this.training5.weightInKg = this.weight5;
+    this.training5.setCount = this.settings.setCount;
+    this.training5.repeatsInSet = this.settings.repeatsInSet;
+    this.restProvider.saveTraining(this.training5).then((result:any) => {
       console.log(">> training saved");
     }, (err) => {
       console.log(err);
@@ -216,18 +297,23 @@ export class HomePage {
         if (this.exercises[i].order == 0 ) {
           this.excercise1 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
           this.weight1 = this.exercises[i].weightInKg.toString();
+          console.log('>> objectId: ' + this.exercises[i].objectId);
         } else if (this.exercises[i].order == 1 ) {
           this.excercise2 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
           this.weight2 = this.exercises[i].weightInKg.toString();
+          console.log('>> objectId: ' + this.exercises[i].objectId);
         } else if (this.exercises[i].order == 2 ) {
           this.excercise3 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
           this.weight3 = this.exercises[i].weightInKg.toString();
+          console.log('>> objectId: ' + this.exercises[i].objectId);
         } else if (this.exercises[i].order == 3 ) {
           this.excercise4 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
           this.weight4 = this.exercises[i].weightInKg.toString();
+          console.log('>> objectId: ' + this.exercises[i].objectId);
         } else if (this.exercises[i].order == 4 ) {
           this.excercise5 = this.exercises[i].targetArea + ': ' + this.exercises[i].name;
           this.weight5 = this.exercises[i].weightInKg.toString();
+          console.log('>> objectId: ' + this.exercises[i].objectId);
         }
       }
     }, (err) => {
